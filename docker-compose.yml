@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mts-tests:
+    build: .
+    image: mts-live-tests:latest
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./playwright-report:/app/playwright-report
+    environment:
+      - CI=true
+    command: npx playwright test --reporter=line,allure-playwright,html
+
+  allure-server:
+    image: mts-live-tests:latest
+    ports:
+      - "8050:8050"
+    volumes:
+      - ./allure-results:/app/allure-results
+    command: allure serve allure-results -p 8050
+    depends_on:
+      - mts-tests
