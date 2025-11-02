@@ -55,26 +55,35 @@ npx playwright install
 
 ```bash
 # Все тесты
-npm test
+npx playwright test
 
 # Только быстрые проверки
-npm run test:smoke
+npx playwright test tests/smoke/
 
 # С визуальным интерфейсом
-npm run test:ui
+npx playwright test --ui
 
 # Тесты в браузере
-npm run test:headed
+npx playwright test --headed
+
+# Тесты в определенном браузере
+npx playwright test --project=chromium
+
+# Тесты с дебагом
+npx playwright test --debug
 ```
 
 ### 3. Просмотр отчетов
 
 ```bash
 # HTML отчет Playwright
-npm run report
+npx playwright show-report
 
-# Детальный отчет Allure
-npm run allure:serve
+# Генерация Allure отчета
+allure generate allure-results --clean
+
+# Просмотр Allure отчета
+allure serve allure-results
 ```
 
 ## 🧪 Виды тестов
@@ -147,7 +156,7 @@ test('проверка карточек мероприятий', async ({ page }
 
 Тесты автоматически запускаются:
 
-- При пуше в main/develop ветки
+- При push в main/develop ветки
 - При создании pull request
 - Результаты публикуются в GitHub Pages
 
