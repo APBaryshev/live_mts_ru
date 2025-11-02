@@ -1,29 +1,35 @@
 {
-  "name": "live_mts_ru",
-  "version": "1.0.0",
-  "description": "Autotests for live.mts.ru with Playwright + TypeScript",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:ui": "playwright test --ui",
-    "test:debug": "playwright test --debug",
-    "test:api": "playwright test --grep @api",
-    "test:visual": "playwright test --grep @visual",
-    "report": "playwright show-report",
-    "allure:generate": "allure generate allure-results -o allure-report --clean",
-    "allure:serve": "allure serve allure-results",
-    "allure:clear": "rm -rf allure-results allure-report",
-    "playwright:install": "playwright install"
-  },
-  "keywords": ["playwright", "typescript", "automation", "mts"],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@playwright/test": "^1.56.1",
-    "@types/node": "^24.9.2",
-    "allure-playwright": "^2.9.2",
-    "typescript": "^5.3.0"
-  }
+    "name": "live_mts_ru",
+    "version": "1.0.0",
+    "description": "Autotests for live.mts.ru with Playwright + TypeScript",
+    "type": "module",
+    "scripts": {
+        "test": "playwright test",
+        "test:headed": "playwright test --headed",
+        "test:ui": "playwright test --ui",
+        "test:debug": "playwright test --debug",
+        "test:smoke": "playwright test tests/smoke/",
+        "test:features": "playwright test tests/features/",
+        "test:api": "playwright test tests/api/",
+        "test:visual": "playwright test --grep @visual",
+        "report": "playwright show-report",
+        "allure:generate": "allure generate allure-results -o allure-report --clean",
+        "allure:serve": "allure serve allure-results",
+        "allure:clear": "rm -rf allure-results allure-report",
+        "playwright:install": "playwright install"
+    },
+    "keywords": [
+        "playwright",
+        "typescript",
+        "automation",
+        "mts"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@playwright/test": "^1.56.1",
+        "@types/node": "^24.9.2",
+        "allure-playwright": "^2.9.2",
+        "typescript": "^5.3.0"
+    }
 }
