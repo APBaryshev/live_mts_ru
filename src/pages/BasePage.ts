@@ -23,7 +23,7 @@ export abstract class BasePage {
         await this.page.waitForLoadState("domcontentloaded");
     }
 
-    // Дополнительные методы для надежности
+    // Дополнительные методы
 
     async waitForElementVisible(selector: string | Locator, timeout: number = 10000): Promise<void> {
         const locator = typeof selector === "string" ? this.page.locator(selector) : selector;

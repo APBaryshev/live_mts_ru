@@ -27,5 +27,5 @@ try {
     console.log(`Average time per test: ${Math.round(result.stats.duration / result.stats.total)}ms`);
 } catch (error) {
     console.log("❌ Error analyzing benchmark:", error.message);
-    console.log('💡 Run "make benchmark" first to generate benchmark data');
+    console.log('Run "make benchmark" first to generate benchmark data');
 }

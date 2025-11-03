@@ -1,4 +1,3 @@
-// src/components/FooterComponent.ts
 import { Page, Locator, expect } from "@playwright/test";
 import { SELECTORS } from "../constants/Selectors";
 
