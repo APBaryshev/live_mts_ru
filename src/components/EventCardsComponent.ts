@@ -1,8 +1,8 @@
-// src/components/EventCardsComponent.ts
 import { Page, Locator, expect } from "@playwright/test";
 import { SELECTORS } from "../constants/Selectors";
 import { EventCard } from "../types/common";
 
+// Класс отвечает за коллекцию карточек
 export class EventCardsComponent {
     readonly page: Page;
     readonly container: Locator;
@@ -126,12 +126,12 @@ class EventCardElement {
 
     async clickBook(): Promise<void> {
         await this.bookButton.click();
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.page.locator(SELECTORS.BOOKING_MODAL)).toBeVisible();
     }
 
     async clickCard(): Promise<void> {
         await this.container.click();
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.page.locator(SELECTORS.EVENT_DETAILS)).toBeVisible();
     }
 
     async isDiscountAvailable(): Promise<boolean> {

@@ -8,6 +8,7 @@ export class LoginPage extends BasePage {
     readonly passwordInput: Locator;
     readonly submitButton: Locator;
     readonly errorMessage: Locator;
+    readonly successIndicator: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -16,6 +17,7 @@ export class LoginPage extends BasePage {
         this.passwordInput = this.authModal.locator(SELECTORS.PASSWORD_INPUT);
         this.submitButton = this.authModal.locator(SELECTORS.LOGIN_SUBMIT);
         this.errorMessage = this.authModal.locator(SELECTORS.AUTH_ERROR);
+        this.successIndicator = page.locator(SELECTORS.USER_MENU);
     }
 
     async openAuthModal(): Promise<void> {
@@ -27,7 +29,15 @@ export class LoginPage extends BasePage {
         await this.phoneInput.fill(phone);
         await this.passwordInput.fill(password);
         await this.submitButton.click();
-        await this.page.waitForLoadState("networkidle");
+        await this.waitForLoginResult();
+    }
+
+    private async waitForLoginResult(): Promise<void> {
+        // Ожидаем либо успешный вход, либо ошибку
+        await Promise.race([
+            expect(this.successIndicator).toBeVisible({ timeout: 10000 }),
+            expect(this.errorMessage).toBeVisible({ timeout: 10000 }),
+        ]);
     }
 
     async isLoginSuccessful(): Promise<boolean> {
@@ -36,6 +46,7 @@ export class LoginPage extends BasePage {
     }
 
     async getErrorMessage(): Promise<string> {
+        // обрезаем пробелы (если текст есть), если текст null/undefined, возвращаем пустую строку
         return (await this.errorMessage.textContent())?.trim() || "";
     }
 

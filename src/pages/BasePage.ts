@@ -10,8 +10,9 @@ export abstract class BasePage {
     }
 
     async navigateTo(url: string = "/"): Promise<void> {
-        await this.page.goto(url);
-        await this.page.waitForLoadState("networkidle");
+        await this.page.goto(url, {
+            waitUntil: "domcontentloaded",
+        });
     }
 
     async getPageTitle(): Promise<string> {
@@ -20,6 +21,27 @@ export abstract class BasePage {
 
     async waitForPageLoad(): Promise<void> {
         await this.page.waitForLoadState("domcontentloaded");
-        await this.page.waitForLoadState("networkidle");
+    }
+
+    // Дополнительные методы для надежности
+
+    async waitForElementVisible(selector: string | Locator, timeout: number = 10000): Promise<void> {
+        const locator = typeof selector === "string" ? this.page.locator(selector) : selector;
+        await locator.waitFor({ state: "visible", timeout });
+    }
+
+    async waitForElementHidden(selector: string | Locator, timeout: number = 10000): Promise<void> {
+        const locator = typeof selector === "string" ? this.page.locator(selector) : selector;
+        await locator.waitFor({ state: "hidden", timeout });
+    }
+
+    async isElementVisible(selector: string | Locator): Promise<boolean> {
+        try {
+            const locator = typeof selector === "string" ? this.page.locator(selector) : selector;
+            await locator.waitFor({ state: "visible", timeout: 5000 });
+            return true;
+        } catch {
+            return false;
+        }
     }
 }

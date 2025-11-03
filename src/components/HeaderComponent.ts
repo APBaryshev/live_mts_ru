@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, expect } from "@playwright/test";
 import { SELECTORS } from "../constants/Selectors";
 
 export class HeaderComponent {
@@ -28,24 +28,24 @@ export class HeaderComponent {
 
     async clickLogo(): Promise<void> {
         await this.logo.click();
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.page.locator(SELECTORS.HERO_BANNER)).toBeVisible();
     }
 
     async searchFor(query: string): Promise<void> {
         await this.search.fill(query);
         await this.search.press("Enter");
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.page.locator(SELECTORS.SEARCH_RESULTS)).toBeVisible();
     }
 
     async navigateToCategory(categoryName: string): Promise<void> {
         const categoryLink = this.navigation.locator(`a:has-text("${categoryName}")`);
         await categoryLink.click();
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.page.locator(`h1:has-text("${categoryName}")`)).toBeVisible();
     }
 
     async openLoginModal(): Promise<void> {
         await this.loginButton.click();
-        await this.page.waitForTimeout(1000);
+        await expect(this.page.locator(SELECTORS.AUTH_MODAL)).toBeVisible();
     }
 
     async isUserLoggedIn(): Promise<boolean> {
@@ -61,7 +61,7 @@ export class HeaderComponent {
             await this.userMenu.click();
             const logoutButton = this.page.locator('button:has-text("Выйти")');
             await logoutButton.click();
-            await this.page.waitForLoadState("networkidle");
+            await expect(this.loginButton).toBeVisible();
         }
     }
 }

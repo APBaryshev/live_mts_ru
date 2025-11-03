@@ -38,12 +38,13 @@ export class FooterComponent {
     async navigateToSection(sectionName: string): Promise<void> {
         const sectionLink = this.menuSection.locator(`a:has-text("${sectionName}")`);
         await sectionLink.click();
-        await this.page.waitForLoadState("networkidle");
+        await expect(this.page.locator('h1:has-text("${sectionName}")')).toBeVisible();
     }
 
     async clickSocialLink(networkName: string): Promise<void> {
         const socialLink = this.socialSection.locator(`a:has-text("${networkName}")`);
-        await socialLink.click();
+        const [newPage] = await Promise.all([this.page.context().waitForEvent("page"), socialLink.click()]);
+        await newPage.waitForLoadState("domcontentloaded");
     }
 
     async clickMTSLiveApp(): Promise<void> {

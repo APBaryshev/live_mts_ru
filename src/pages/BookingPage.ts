@@ -9,6 +9,7 @@ export class BookingPage extends BasePage {
     readonly eventTitle: Locator;
     readonly eventDate: Locator;
     readonly totalPrice: Locator;
+    readonly successMessage: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -18,24 +19,38 @@ export class BookingPage extends BasePage {
         this.eventTitle = this.bookingModal.locator(SELECTORS.EVENT_TITLE);
         this.eventDate = this.bookingModal.locator(SELECTORS.EVENT_DATE);
         this.totalPrice = this.bookingModal.locator('.total-price, [data-testid="total-price"]');
+        this.successMessage = page.locator('[data-testid="booking-success"]');
     }
 
     async selectSeat(seatNumber: string): Promise<void> {
         const seat = this.seatSelector.locator(`[data-seat="${seatNumber}"]`);
         await seat.click();
+        await expect(seat).toHaveClass(/selected/);
     }
 
     async bookTickets(): Promise<void> {
         await this.submitButton.click();
-        await this.page.waitForLoadState("networkidle");
+        await this.waitForBookingCompletion();
+    }
+
+    private async waitForBookingCompletion(): Promise<void> {
+        // Ожидаем конкретный результат бронирования
+        await Promise.race([
+            expect(this.successMessage).toBeVisible({ timeout: 15000 }),
+            expect(this.page.locator('[data-testid="booking-error"]')).toBeVisible(),
+        ]);
     }
 
     async getEventInfo(): Promise<{ title: string; date: string; price: string }> {
         return {
-            title: (await this.eventTitle.textContent())?.trim() || "",
-            date: (await this.eventDate.textContent())?.trim() || "",
-            price: (await this.totalPrice.textContent())?.trim() || "",
+            title: await this.getTrimmedText(this.eventTitle),
+            date: await this.getTrimmedText(this.eventDate),
+            price: await this.getTrimmedText(this.totalPrice),
         };
+    }
+
+    private async getTrimmedText(locator: Locator): Promise<string> {
+        return (await locator.textContent())?.trim() || "";
     }
 
     async isBookingModalVisible(): Promise<boolean> {
