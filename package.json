@@ -12,13 +12,21 @@
         "test:features": "playwright test tests/features/",
         "test:api": "playwright test tests/api/",
         "test:visual": "playwright test --grep @visual",
+        "test:ci": "playwright test --reporter=line,html",
         "report": "playwright show-report",
         "allure:generate": "allure generate allure-results -o allure-report --clean",
         "allure:serve": "allure serve allure-results",
         "allure:clear": "rm -rf allure-results allure-report",
         "playwright:install": "playwright install",
         "prepare": "husky install",
-        "pre-commit": "npx tsc --noEmit && npm run test:smoke"
+        "pre-commit": "npm run quality-check",
+        "type-check": "tsc --noEmit",
+        "type-check:strict": "tsc --noEmit --strict true",
+        "lint": "eslint src/ tests/ --ext .ts,.tsx",
+        "lint:fix": "eslint src/ tests/ --ext .ts,.tsx --fix",
+        "lint:strict": "eslint src/ tests/ --ext .ts,.tsx --max-warnings=0",
+        "quality-check": "npm run type-check:strict && npm run lint:strict && npm run test:smoke",
+        "ci-check": "npm run type-check:strict && npm run lint:strict && npm run test:ci"
     },
     "keywords": [
         "playwright",
@@ -31,8 +39,12 @@
     "devDependencies": {
         "@playwright/test": "^1.56.1",
         "@types/node": "^24.9.2",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
         "allure-playwright": "^2.9.2",
         "typescript": "^5.3.0",
-        "husky": "^8.0.0"
+        "husky": "^8.0.0",
+        "eslint": "^8.0.0",
+        "eslint-plugin-playwright": "^0.15.0"
     }
 }
