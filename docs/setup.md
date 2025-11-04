@@ -32,8 +32,7 @@ HEADLESS=true
 SLOW_MO=0
 ```
 
->[!WARNING]  
->Внимание! Не коммитьте файл .env в Git! Он добавлен в .gitignore
+>**Внимание!** Не коммитьте файл .env в Git! Он добавлен в .gitignore
 
 ## Проверка установки
 
@@ -73,5 +72,5 @@ npm run test:ui
 npm run test:allure
 ```
 
->[!TIP]
+>**Совет:**  
 >Используйте make help для просмотра всех доступных команд Makefile
