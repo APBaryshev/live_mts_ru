@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://your-username.github.io/your-repo/</loc>
+         <loc>https://apbaryshev.github.io/live_mts_ru/</loc>
          <lastmod>2025-11-04</lastmod>
     </url>
     <url>
-         <loc>https://your-username.github.io/your-repo/api/</loc>
+         <loc>https://apbaryshev.github.io/live_mts_ru/api/</loc>
          <lastmod>2025-11-04</lastmod>
     </url>
     <url>
-         <loc>https://your-username.github.io/your-repo/cicd/</loc>
+         <loc>https://apbaryshev.github.io/live_mts_ru/cicd/</loc>
          <lastmod>2025-11-04</lastmod>
     </url>
     <url>
-         <loc>https://your-username.github.io/your-repo/debugging/</loc>
+         <loc>https://apbaryshev.github.io/live_mts_ru/debugging/</loc>
          <lastmod>2025-11-04</lastmod>
     </url>
     <url>
-         <loc>https://your-username.github.io/your-repo/setup/</loc>
+         <loc>https://apbaryshev.github.io/live_mts_ru/setup/</loc>
          <lastmod>2025-11-04</lastmod>
     </url>
     <url>
-         <loc>https://your-username.github.io/your-repo/testing/</loc>
+         <loc>https://apbaryshev.github.io/live_mts_ru/testing/</loc>
          <lastmod>2025-11-04</lastmod>
     </url>
     <url>
-         <loc>https://your-username.github.io/your-repo/warnings/</loc>
+         <loc>https://apbaryshev.github.io/live_mts_ru/warnings/</loc>
          <lastmod>2025-11-04</lastmod>
     </url>
 </urlset>
