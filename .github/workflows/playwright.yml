@@ -171,18 +171,26 @@ jobs:
                   path: allure-report/
               if: always()
 
-    deploy-to-pages:
+    upload-allure-report:
         runs-on: ubuntu-latest
         needs: generate-allure-report
-        name: Deploy to GitHub Pages
-
-        permissions:
-            pages: write
-            id-token: write
-            contents: read
-
+        name: Upload Allure Report
+        
         steps:
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4
-              if: always()
+            - name: Download test results
+              uses: actions/download-artifact@v4
+              with:
+                  name: allure-results
+                  path: allure-results
+
+            - name: Generate Allure Report
+              run: |
+                  wget -q https://github.com/allure-framework/allure2/releases/download/2.24.0/allure-2.24.0.tgz
+                  tar -zxvf allure-2.24.0.tgz -C /opt/
+                  sudo ln -sf /opt/allure-2.24.0/bin/allure /usr/bin/allure
+                  allure generate allure-results --clean -o public/allure
+
+            - name: Upload Allure to Pages
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: public/allure/

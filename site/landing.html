@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MTS Live - Документация и отчеты</title>
+        <style>
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 40px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 15px;
+                padding: 40px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            h1 {
+                color: #000000; /* ЧЕРНЫЙ - МАКСИМАЛЬНАЯ ЧИТАЕМОСТЬ */
+                text-align: center;
+                margin-bottom: 30px;
+                font-weight: 700;
+                font-size: 32px;
+            }
+            .links {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .link {
+                display: flex;
+                align-items: center;
+                padding: 20px;
+                background: #f8f9fa;
+                border: 2px solid #e9ecef;
+                border-radius: 10px;
+                text-decoration: none;
+                color: #212529; /* ТЕМНО-СЕРЫЙ */
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+            .link:hover {
+                background: #007bff;
+                color: white;
+                border-color: #007bff;
+                transform: translateY(-2px);
+            }
+            .icon {
+                margin-right: 15px;
+                font-size: 24px;
+            }
+            .badge {
+                margin-left: auto;
+                background: #28a745;
+                color: white;
+                padding: 6px 12px;
+                border-radius: 15px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🎭 MTS Live Autotests</h1>
+            <div class="links">
+                <a href="./docs/" class="link">
+                    <span class="icon">📚</span>
+                    Документация проекта
+                    <span class="badge">MkDocs</span>
+                </a>
+                <a href="./allure/" class="link">
+                    <span class="icon">📊</span>
+                    Allure отчеты тестов
+                    <span class="badge">Latest</span>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

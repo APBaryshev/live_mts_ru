@@ -1,0 +1,56 @@
+site_name: MTS Live Autotests
+site_description: Полная документация автотестов для live.mts.ru
+site_url: https://apbaryshev.github.io/live_mts_ru/
+repo_url: https://github.com/APBaryshev/live_mts_ru
+repo_name: APBaryshev/live_mts_ru
+
+nav:
+    - Главная: index.md
+    - Быстрый старт: setup.md
+    - Тестирование: testing.md
+    - API: api.md
+    - Важные предупреждения: warnings.md
+    - CI/CD: cicd.md
+
+theme:
+    name: material
+    language: ru
+    custom_dir: docs/overrides
+    palette:
+        - scheme: default
+          toggle:
+              icon: material/weather-night
+              name: Темная тема
+          primary: teal
+          accent: blue
+        - scheme: slate
+          toggle:
+              icon: material/weather-sunny
+              name: Светлая тема
+          primary: teal
+          accent: blue
+
+    features:
+        - navigation.tabs
+        - navigation.tabs.sticky
+        - navigation.top
+        - search.suggest
+        - search.highlight
+        - content.code.copy
+        - content.code.annotate
+
+# extra_css:
+#     - css/docstyle.css
+
+markdown_extensions:
+    - toc:
+          permalink: "#"
+    - pymdownx.highlight:
+          anchor_linenums: true
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+    - attr_list
+    - pymdownx.emoji:
+          emoji_index: !!python/name:material.extensions.emoji.twemoji
+          emoji_generator: !!python/name:material.extensions.emoji.to_svg

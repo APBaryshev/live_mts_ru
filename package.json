@@ -13,6 +13,7 @@
         "test:api": "playwright test tests/api/",
         "test:visual": "playwright test --grep @visual",
         "test:ci": "playwright test --reporter=line,html",
+        "test:allure": "playwright test && allure generate allure-results --clean",
         "report": "playwright show-report",
         "allure:generate": "allure generate allure-results -o allure-report --clean",
         "allure:serve": "allure serve allure-results",
