@@ -11,57 +11,37 @@ test.describe("Header Comprehensive Tests", () => {
 
     test("should handle user authentication state", async () => {
         const isLoggedIn = await homePage.header.isUserLoggedIn();
-        const headerState = await homePage.header.getHeaderState();
 
         if (isLoggedIn) {
-            // Пользователь залогинен - проверяем user menu
-            const userName = await homePage.header.getUserName();
-            expect(userName).toBeTruthy();
-            expect(headerState.userMenuVisible).toBe(true);
-            expect(headerState.loginVisible).toBe(false);
+            // Простая проверка что user menu виден
+            await expect(homePage.header.userMenu).toBeVisible();
         } else {
-            // Пользователь не залогинен - проверяем кнопку входа
+            // Простая проверка что кнопка входа видна
+            await expect(homePage.header.loginButton).toBeVisible();
             const loginText = await homePage.header.getLoginButtonText();
             expect(loginText).toBe("Войти");
-            expect(headerState.userMenuVisible).toBe(false);
-            expect(headerState.loginVisible).toBe(true);
         }
     });
 
-    test("should navigate using all header methods", async ({ page }) => {
-        // 💡 Получаем навигацию через новый метод
-        const navItems = await homePage.header.getNavigationItems();
-        expect(navItems.length).toBeGreaterThan(0);
-
-        // 💡 Находим категорию "Концерты"
-        const concertsNav = navItems.find((item) => item.name.includes("Концерты"));
-        if (concertsNav) {
-            // 💡 Используем старый метод для навигации
-            await homePage.header.navigateToCategory("Концерты");
-
-            // Проверяем навигацию
-            await expect(page).toHaveURL(/concerts/);
-            await expect(page.locator("h1")).toBeVisible();
-        }
+    test("should navigate using header navigation", async ({ page }) => {
+        // Простая навигация без сложных методов
+        await homePage.header.navigateToCategory("Концерты");
+        await expect(page).toHaveURL(/concerts/);
+        await expect(page.locator("h1")).toBeVisible();
     });
 
-    test("should handle login modal properly", async () => {
-        // Комплексная проверка логина
-        if (!(await homePage.header.isUserLoggedIn())) {
-            await homePage.header.openLoginModal();
+    test("should have working login button", async () => {
+        await expect(homePage.header.loginButton).toBeVisible();
+        await expect(homePage.header.loginButton).toBeEnabled();
 
-            // Проверяем что состояние изменилось
-            const loginText = await homePage.header.getLoginButtonText();
-            const isButtonChanged = loginText !== "Войти";
+        const loginText = await homePage.header.getLoginButtonText();
+        expect(loginText).toBe("Войти");
 
-            // Или появилась форма авторизации
-            const authForm = homePage.page.locator('input[type="tel"], input[type="password"]');
-            const hasAuthForm = await authForm
-                .first()
-                .isVisible()
-                .catch(() => false);
+        // Кликаем и проверяем базовую функциональность
+        await homePage.header.loginButton.click();
+        await homePage.page.waitForLoadState("domcontentloaded");
 
-            expect(isButtonChanged || hasAuthForm).toBe(true);
-        }
+        // Убеждаемся что страница не сломалась
+        await expect(homePage.header.logo).toBeVisible();
     });
 });

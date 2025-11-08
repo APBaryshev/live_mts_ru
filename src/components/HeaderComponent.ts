@@ -1,6 +1,15 @@
 import { Page, Locator } from "@playwright/test";
 
 export class HeaderComponent {
+    getHeaderState() {
+        throw new Error('Method not implemented.');
+    }
+    getUserName() {
+        throw new Error('Method not implemented.');
+    }
+    getNavigationItems() {
+        throw new Error('Method not implemented.');
+    }
     readonly page: Page;
     readonly container: Locator;
     readonly logo: Locator;
