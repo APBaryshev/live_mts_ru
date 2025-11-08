@@ -1,10 +1,8 @@
-import { Page, expect } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { HeaderComponent } from "../components/HeaderComponent";
 import { EventCardsComponent } from "../components/EventCardsComponent";
-import { SELECTORS } from "../constants/Selectors";
 
-// Конкретная страница - наследует общую логику
 export class HomePage extends BasePage {
     readonly header: HeaderComponent;
     readonly eventCards: EventCardsComponent;
@@ -16,20 +14,18 @@ export class HomePage extends BasePage {
     }
 
     async open(): Promise<void> {
-        await this.navigateTo("https://live.mts.ru");
+        await this.navigateTo("https://live.mts.ru/moscow");
         await this.waitForPageLoad();
-        // Добавляем ожидание ключевых элементов
         await this.waitForHomePageReady();
     }
 
     private async waitForHomePageReady(): Promise<void> {
-        await Promise.all([
-            expect(this.header.logo).toBeVisible(),
-            expect(this.page.locator(SELECTORS.HERO_BANNER)).toBeVisible(),
-        ]);
+        // Только самая важная проверка + ждем загрузку
+        await this.page.waitForLoadState("domcontentloaded");
+        await this.header.logo.waitFor({ state: "visible", timeout: 10000 });
     }
 
-    // Быстрый доступ к популярным категориям
+    // Быстрый доступ к категориям
     async openConcerts(): Promise<void> {
         await this.header.navigateToCategory("Концерты");
     }

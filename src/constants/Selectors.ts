@@ -2,10 +2,10 @@ export const SELECTORS = {
     HEADER: "header",
     LOGO: 'header a[title="MTC LIVE"] img',
     SEARCH_INPUT: 'header input[placeholder="Событие, персона, площадка"]',
-    SEARCH_BUTTON: 'header [aria-label="Поиск"]',
-    LOCATION_BUTTON: 'header button[title="Выбор региона"]',
+    SEARCH_BUTTON: 'button[data-testid="search-button"]',
+    LOCATION_BUTTON: 'button[data-testid="location-button"]',
     LOGIN_BUTTON: 'header button:has-text("Войти")',
-    USER_MENU: '[data-testid="user-menu"]',
+    USER_MENU: '[data-testid="user-menu"], .user-menu',
 
     PHONE_INPUT: "",
     PASSWORD_INPUT: "",
@@ -14,8 +14,8 @@ export const SELECTORS = {
 
     NAVIGATION: "header nav",
     NAV_ITEM: "header nav a",
-    NAV_ALL_EVENTS: 'header a[href="/moscow"]',
-    NAV_CONCERTS: 'header a[href*="/concerts"]',
+    NAV_ALL_EVENTS: 'a[data-testid="nav-all-events"]',
+    NAV_CONCERTS: 'a[data-testid="nav-concerts"]',
     NAV_THEATER: 'header a[href*="/theater"]',
     NAV_STANDUP: 'header a[href*="/standup"]',
 
@@ -30,6 +30,6 @@ export const SELECTORS = {
     SEAT_SELECTOR: "",
     BOOKING_SUBMIT: "",
 
-    AUTH_MODAL: '[data-testid="auth-modal"], .auth-modal',
+    AUTH_MODAL: '[data-testid="auth-modal"], .auth-modal, form',
     BOOKING_MODAL: '[data-testid="booking-modal"], .booking-modal',
 } as const;

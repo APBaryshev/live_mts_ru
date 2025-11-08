@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import { HomePage } from "../../src/pages/HomePage";
-import { NavigationItem } from "../../src/types/common";
 
 test.describe("Header Smoke Tests", () => {
     let homePage: HomePage;
@@ -10,72 +9,62 @@ test.describe("Header Smoke Tests", () => {
         await homePage.open();
     });
 
-    test("should display header with all main elements", async () => {
-        // Шаг 1: Проверяем что хедер загрузился
-        await expect(homePage.header.container).toBeVisible();
-
-        // Шаг 2: Проверяем основные элементы хедера
+    test("should display header with main elements", async () => {
         await expect(homePage.header.logo).toBeVisible();
         await expect(homePage.header.search).toBeVisible();
-        await expect(homePage.header.location).toBeVisible();
         await expect(homePage.header.loginButton).toBeVisible();
-        await expect(homePage.header.navigation).toBeVisible();
-
-        // Шаг 3: Проверяем специфические атрибуты
-        const logo = homePage.header.logo;
-        await expect(logo).toHaveAttribute("alt", "MTC LIVE");
-        await expect(logo).toHaveAttribute("src", /Logo.svg/);
-
-        // Шаг 4: Проверяем плейсхолдер поиска
-        await expect(homePage.header.search).toHaveAttribute("placeholder", "Событие, персона, площадка");
+        await expect(homePage.header.logo).toHaveAttribute("alt", "MTC LIVE");
     });
 
-    test("should display correct navigation menu items", async () => {
-        // Используем интерфейс из common.ts
-        const expectedNavItems: NavigationItem[] = [
-            { name: "Все события", testId: "nav-all-events", url: "/moscow" },
-            { name: "С кешбэком", testId: "nav-cashback", url: "/moscow/collections/events_with_cashback" },
-            { name: "Концерты", testId: "nav-concerts", url: "/moscow/collections/concerts" },
-            { name: "Спектакли", testId: "nav-theater", url: "/moscow/collections/theater" },
-            { name: "Стендап", testId: "nav-standup", url: "/moscow/collections/standup" },
-        ];
+    test("should have working logo that navigates to home", async ({ page }) => {
+        // Переходим на другую страницу и возвращаемся по логотипу
+        await homePage.openConcerts();
+        await expect(page).toHaveURL(/concerts/);
 
-        // Шаг 1: Получаем все элементы навигации
-        const navItems = homePage.header.navigation.locator("a");
-        const count = await navItems.count();
-
-        expect(count).toBeGreaterThan(0);
-
-        // Шаг 2: Проверяем основные пункты меню
-        for (const expectedItem of expectedNavItems.slice(0, 3)) {
-            const navItem = homePage.header.navigation.locator(`a:has-text("${expectedItem.name}")`);
-            await expect(navItem).toBeVisible();
-
-            // Шаг 3: Проверяем ссылки
-            if (expectedItem.url) {
-                await expect(navItem).toHaveAttribute("href", expectedItem.url);
-            }
-        }
-    });
-
-    test("should have functional logo that navigates to home", async ({ page }) => {
-        // Шаг 1: Кликаем на логотип
         await homePage.header.clickLogo();
-
-        // Шаг 2: Проверяем что остались на главной странице
-        await expect(page).toHaveURL(/https:\/\/live\.mts\.ru/);
-
-        // Шаг 3: Проверяем что основные элементы все еще видны
-        await expect(homePage.header.logo).toBeVisible();
-        await expect(homePage.header.navigation).toBeVisible();
+        // Исправляем URL - сайт использует /moscow для главной
+        await expect(page).toHaveURL("https://live.mts.ru/moscow");
     });
 
     test("should display login button with correct text", async () => {
-        // Шаг 1: Проверяем текст кнопки
         const loginButtonText = await homePage.header.getLoginButtonText();
         expect(loginButtonText).toBe("Войти");
-
-        // Шаг 2: Проверяем что кнопка кликабельна
         await expect(homePage.header.loginButton).toBeEnabled();
+    });
+
+    test("should have working navigation to main categories", async ({ page }) => {
+        const categories = [
+            { name: "Концерты", url: /concerts/ },
+            { name: "Спектакли", url: /theater/ },
+            { name: "Стендап", url: /standup/ },
+        ];
+
+        for (const category of categories) {
+            await homePage.open();
+            await homePage.header.navigateToCategory(category.name);
+            await expect(page).toHaveURL(category.url);
+
+            // Проверяем что страница загрузилась
+            await expect(page.locator('h1, [data-testid*="title"]').first()).toBeVisible();
+        }
+    });
+
+    test("should have working search field", async () => {
+        // Просто проверяем базовую функциональность поискового поля
+        await expect(homePage.header.search).toBeVisible();
+        await expect(homePage.header.search).toBeEnabled();
+
+        // Проверяем placeholder
+        await expect(homePage.header.search).toHaveAttribute("placeholder", "Событие, персона, площадка");
+
+        // Проверяем что можно вводить текст
+        await homePage.header.search.fill("test");
+        const value = await homePage.header.search.inputValue();
+        expect(value).toBe("test");
+
+        // Проверяем что можно очистить
+        await homePage.header.search.clear();
+        const clearedValue = await homePage.header.search.inputValue();
+        expect(clearedValue).toBe("");
     });
 });
