@@ -31,9 +31,10 @@ jobs:
 
             - name: Install Allure
               run: |
+                  # Установка в домашнюю директорию (без прав суперпользователя)
                   curl -o allure-2.24.0.tgz -Ls https://github.com/allure-framework/allure2/releases/download/2.24.0/allure-2.24.0.tgz
-                  tar -zxvf allure-2.24.0.tgz -C /opt/
-                  ln -sf /opt/allure-2.24.0/bin/allure /usr/bin/allure
+                  tar -zxvf allure-2.24.0.tgz -C $HOME/
+                  echo "$HOME/allure-2.24.0/bin" >> $GITHUB_PATH
 
             - name: Install dependencies
               run: npm ci
@@ -82,13 +83,19 @@ jobs:
                   name: allure-results
                   path: allure-results
 
-            - name: Download Allure report
-              uses: actions/download-artifact@v4
+            - name: Setup Java
+              uses: actions/setup-java@v3
               with:
-                  name: allure-report
-                  path: public/allure
+                  java-version: "17"
+                  distribution: "temurin"
 
-            - name: Regenerate Allure report (fresh)
+            - name: Install Allure
+              run: |
+                  curl -o allure-2.24.0.tgz -Ls https://github.com/allure-framework/allure2/releases/download/2.24.0/allure-2.24.0.tgz
+                  tar -zxvf allure-2.24.0.tgz -C $HOME/
+                  echo "$HOME/allure-2.24.0/bin" >> $GITHUB_PATH
+
+            - name: Generate fresh Allure report
               run: |
                   allure generate allure-results -o public/allure --clean
 
