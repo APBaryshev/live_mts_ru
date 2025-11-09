@@ -111,6 +111,8 @@ test.describe("Event Cards", () => {
         // Кликаем на первую секцию и проверяем переход
         const firstSection = sectionHeaders.first();
         const sectionHref = await firstSection.getAttribute("href");
+        // Сделать скриншот ДО клика — чтобы увидеть, что мешает
+        await page.screenshot({ path: "debug-before-click.png" });
         await firstSection.click();
 
         // Проверяем переход на страницу секции

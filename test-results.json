@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 7
+      "actualWorkers": 8
     },
     "preserveOutput": "always",
     "reporter": [
@@ -41,7 +41,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 8
         },
         "id": "chromium",
         "name": "chromium",
@@ -62,21 +62,21 @@
   },
   "suites": [
     {
-      "title": "api/AuthApi.spec.ts",
-      "file": "api/AuthApi.spec.ts",
+      "title": "features/EventCards.spec.ts",
+      "file": "features/EventCards.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Auth API Tests",
-          "file": "api/AuthApi.spec.ts",
-          "line": 4,
+          "title": "Event Cards",
+          "file": "features/EventCards.spec.ts",
+          "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "should authenticate user with valid credentials",
-              "ok": false,
+              "title": "should display event cards with correct information",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -89,52 +89,28 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 125,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:13:35",
-                        "location": {
-                          "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                          "column": 35,
-                          "line": 13
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 11 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 12 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m\n \u001b[90m 15 |\u001b[39m         \u001b[36mconst\u001b[39m responseBody \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m         expect(responseBody)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m\"token\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                            "column": 35,
-                            "line": 13
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n\u001b[0m \u001b[90m 11 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 12 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m\n \u001b[90m 15 |\u001b[39m         \u001b[36mconst\u001b[39m responseBody \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m         expect(responseBody)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m\"token\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:13:35\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 14150,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-08T16:58:26.011Z",
+                      "startTime": "2025-11-09T13:31:57.669Z",
                       "annotations": [],
-                      "attachments": [],
-                      "errorLocation": {
-                        "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                        "column": 35,
-                        "line": 13
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "a54da4e2adcee5febd72-5baff62637ad5f2fd28f",
-              "file": "api/AuthApi.spec.ts",
-              "line": 5,
+              "id": "253efc5c8f73abaa1103-b409b28cc95d7166cfe5",
+              "file": "features/EventCards.spec.ts",
+              "line": 11,
               "column": 5
             },
             {
-              "title": "should return error with invalid credentials",
-              "ok": false,
+              "title": "should display event image",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -147,52 +123,28 @@
                     {
                       "workerIndex": 1,
                       "parallelIndex": 1,
-                      "status": "failed",
-                      "duration": 145,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m404\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:29:35",
-                        "location": {
-                          "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                          "column": 35,
-                          "line": 29
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 27 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 29 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m401\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m         \u001b[36mconst\u001b[39m responseBody \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 32 |\u001b[39m         expect(responseBody)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m\"error\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                            "column": 35,
-                            "line": 29
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m401\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n\u001b[0m \u001b[90m 27 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 29 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m401\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m         \u001b[36mconst\u001b[39m responseBody \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 32 |\u001b[39m         expect(responseBody)\u001b[33m.\u001b[39mtoHaveProperty(\u001b[32m\"error\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:29:35\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 9754,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-08T16:58:26.061Z",
+                      "startTime": "2025-11-09T13:31:57.575Z",
                       "annotations": [],
-                      "attachments": [],
-                      "errorLocation": {
-                        "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                        "column": 35,
-                        "line": 29
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "a54da4e2adcee5febd72-44ce72eb39ebc985006a",
-              "file": "api/AuthApi.spec.ts",
+              "id": "253efc5c8f73abaa1103-d4aee1262f87e5a207a2",
+              "file": "features/EventCards.spec.ts",
               "line": 21,
               "column": 5
             },
             {
-              "title": "should return error with invalid phone format",
-              "ok": false,
+              "title": "should display event title",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -205,52 +157,28 @@
                     {
                       "workerIndex": 2,
                       "parallelIndex": 2,
-                      "status": "failed",
-                      "duration": 147,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m404\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:44:35",
-                        "location": {
-                          "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                          "column": 35,
-                          "line": 44
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 42 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 43 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 44 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m400\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 45 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 46 |\u001b[39m\n \u001b[90m 47 |\u001b[39m     test(\u001b[32m\"should refresh token successfully\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                            "column": 35,
-                            "line": 44
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n\u001b[0m \u001b[90m 42 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 43 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 44 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m400\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 45 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 46 |\u001b[39m\n \u001b[90m 47 |\u001b[39m     test(\u001b[32m\"should refresh token successfully\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ request }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:44:35\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 14681,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-08T16:58:25.888Z",
+                      "startTime": "2025-11-09T13:31:57.614Z",
                       "annotations": [],
-                      "attachments": [],
-                      "errorLocation": {
-                        "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                        "column": 35,
-                        "line": 44
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "a54da4e2adcee5febd72-643c2134b43dc386986c",
-              "file": "api/AuthApi.spec.ts",
-              "line": 36,
+              "id": "253efc5c8f73abaa1103-af5c297fdfa50a825c2a",
+              "file": "features/EventCards.spec.ts",
+              "line": 33,
               "column": 5
             },
             {
-              "title": "should refresh token successfully",
-              "ok": false,
+              "title": "should display event price",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -263,60 +191,28 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 3,
-                      "status": "failed",
-                      "duration": 125,
-                      "error": {
-                        "message": "SyntaxError: Unexpected end of JSON input",
-                        "stack": "SyntaxError: Unexpected end of JSON input\n    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:56:34",
-                        "location": {
-                          "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                          "column": 34,
-                          "line": 56
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 54 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 55 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 56 |\u001b[39m         \u001b[36mconst\u001b[39m { refreshToken } \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m loginResponse\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 57 |\u001b[39m\n \u001b[90m 58 |\u001b[39m         \u001b[90m// Refresh token\u001b[39m\n \u001b[90m 59 |\u001b[39m         \u001b[36mconst\u001b[39m refreshResponse \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m`${URLS.API_BASE}/auth/refresh`\u001b[39m\u001b[33m,\u001b[39m {\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                            "column": 34,
-                            "line": 56
-                          },
-                          "message": "SyntaxError: Unexpected end of JSON input\n\n\u001b[0m \u001b[90m 54 |\u001b[39m         })\u001b[33m;\u001b[39m\n \u001b[90m 55 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 56 |\u001b[39m         \u001b[36mconst\u001b[39m { refreshToken } \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m loginResponse\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 57 |\u001b[39m\n \u001b[90m 58 |\u001b[39m         \u001b[90m// Refresh token\u001b[39m\n \u001b[90m 59 |\u001b[39m         \u001b[36mconst\u001b[39m refreshResponse \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39mpost(\u001b[32m`${URLS.API_BASE}/auth/refresh`\u001b[39m\u001b[33m,\u001b[39m {\u001b[0m\n\u001b[2m    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:56:34\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 14071,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-08T16:58:26.005Z",
+                      "startTime": "2025-11-09T13:31:57.828Z",
                       "annotations": [],
-                      "attachments": [],
-                      "errorLocation": {
-                        "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                        "column": 34,
-                        "line": 56
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "a54da4e2adcee5febd72-faa61d1d142af8063192",
-              "file": "api/AuthApi.spec.ts",
-              "line": 47,
+              "id": "253efc5c8f73abaa1103-72b98eacd13565c7890e",
+              "file": "features/EventCards.spec.ts",
+              "line": 45,
               "column": 5
-            }
-          ]
-        },
-        {
-          "title": "Events API Tests",
-          "file": "api/AuthApi.spec.ts",
-          "line": 70,
-          "column": 6,
-          "specs": [
+            },
             {
-              "title": "should fetch events list",
-              "ok": false,
+              "title": "should display event date and time",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -329,51 +225,27 @@
                     {
                       "workerIndex": 4,
                       "parallelIndex": 4,
-                      "status": "failed",
-                      "duration": 114,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:74:35",
-                        "location": {
-                          "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                          "column": 35,
-                          "line": 74
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 72 |\u001b[39m         \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m`${URLS.API_BASE}/events`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 73 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m\n \u001b[90m 76 |\u001b[39m         \u001b[36mconst\u001b[39m events \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         expect(\u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(events))\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                            "column": 35,
-                            "line": 74
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n\u001b[0m \u001b[90m 72 |\u001b[39m         \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m`${URLS.API_BASE}/events`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 73 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 74 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 75 |\u001b[39m\n \u001b[90m 76 |\u001b[39m         \u001b[36mconst\u001b[39m events \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         expect(\u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(events))\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:74:35\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 12222,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-08T16:58:25.881Z",
+                      "startTime": "2025-11-09T13:31:57.553Z",
                       "annotations": [],
-                      "attachments": [],
-                      "errorLocation": {
-                        "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                        "column": 35,
-                        "line": 74
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "a54da4e2adcee5febd72-0bfb57c2afc7887672a4",
-              "file": "api/AuthApi.spec.ts",
-              "line": 71,
+              "id": "253efc5c8f73abaa1103-fa7784c46a6fe66d3bc4",
+              "file": "features/EventCards.spec.ts",
+              "line": 57,
               "column": 5
             },
             {
-              "title": "should fetch event by id",
+              "title": "should display venue information",
               "ok": true,
               "tags": [],
               "tests": [
@@ -388,12 +260,12 @@
                       "workerIndex": 5,
                       "parallelIndex": 5,
                       "status": "passed",
-                      "duration": 119,
+                      "duration": 9802,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-08T16:58:25.906Z",
+                      "startTime": "2025-11-09T13:31:57.513Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -401,14 +273,14 @@
                   "status": "expected"
                 }
               ],
-              "id": "a54da4e2adcee5febd72-f6979390b0b9989df493",
-              "file": "api/AuthApi.spec.ts",
-              "line": 88,
+              "id": "253efc5c8f73abaa1103-8361e5e4997ccd077da2",
+              "file": "features/EventCards.spec.ts",
+              "line": 69,
               "column": 5
             },
             {
-              "title": "should search events by query",
-              "ok": false,
+              "title": "should have favorite button",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -421,47 +293,125 @@
                     {
                       "workerIndex": 6,
                       "parallelIndex": 6,
-                      "status": "failed",
-                      "duration": 111,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:103:35",
-                        "location": {
-                          "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                          "column": 35,
-                          "line": 103
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 101 |\u001b[39m         \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m`${URLS.API_BASE}/events?search=концерт`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m\n \u001b[90m 105 |\u001b[39m         \u001b[36mconst\u001b[39m events \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m         expect(\u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(events))\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                            "column": 35,
-                            "line": 103
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m404\u001b[39m\n\n\u001b[0m \u001b[90m 101 |\u001b[39m         \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m request\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(\u001b[32m`${URLS.API_BASE}/events?search=концерт`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 102 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m         expect(response\u001b[33m.\u001b[39mstatus())\u001b[33m.\u001b[39mtoBe(\u001b[35m200\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 104 |\u001b[39m\n \u001b[90m 105 |\u001b[39m         \u001b[36mconst\u001b[39m events \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m response\u001b[33m.\u001b[39mjson()\u001b[33m;\u001b[39m\n \u001b[90m 106 |\u001b[39m         expect(\u001b[33mArray\u001b[39m\u001b[33m.\u001b[39misArray(events))\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts:103:35\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 13029,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-08T16:58:25.918Z",
+                      "startTime": "2025-11-09T13:31:57.753Z",
                       "annotations": [],
-                      "attachments": [],
-                      "errorLocation": {
-                        "file": "/home/baryshev/Документы/apb/gitlab_apb/mts/live_mts_ru/tests/api/AuthApi.spec.ts",
-                        "column": 35,
-                        "line": 103
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "a54da4e2adcee5febd72-b277e9f0b57a0276c7ed",
-              "file": "api/AuthApi.spec.ts",
-              "line": 100,
+              "id": "253efc5c8f73abaa1103-9f66c258f6a001722703",
+              "file": "features/EventCards.spec.ts",
+              "line": 81,
+              "column": 5
+            },
+            {
+              "title": "should display cashback badge for eligible events",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
+                      "status": "passed",
+                      "duration": 8976,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-09T13:31:57.678Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "253efc5c8f73abaa1103-d7afe45a335a96f3be48",
+              "file": "features/EventCards.spec.ts",
+              "line": 89,
+              "column": 5
+            },
+            {
+              "title": "should have working navigation between event sections",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
+                      "status": "passed",
+                      "duration": 2722,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-09T13:32:06.808Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "253efc5c8f73abaa1103-7d304e21f615890ca2d8",
+              "file": "features/EventCards.spec.ts",
+              "line": 103,
+              "column": 5
+            },
+            {
+              "title": "should display slider navigation buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 3038,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-09T13:32:07.431Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "253efc5c8f73abaa1103-3e565992cdc6be22081e",
+              "file": "features/EventCards.spec.ts",
+              "line": 122,
               "column": 5
             }
           ]
@@ -471,11 +421,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-11-08T16:58:25.406Z",
-    "duration": 830.123,
-    "expected": 1,
+    "startTime": "2025-11-09T13:31:57.030Z",
+    "duration": 15424.465,
+    "expected": 10,
     "skipped": 0,
-    "unexpected": 6,
+    "unexpected": 0,
     "flaky": 0
   }
 }

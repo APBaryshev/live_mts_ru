@@ -19,7 +19,6 @@
         "allure:serve": "allure serve allure-results",
         "allure:clear": "rm -rf allure-results allure-report",
         "playwright:install": "playwright install",
-        "prepare": "husky install",
         "pre-commit": "npm run quality-check",
         "type-check": "tsc --noEmit",
         "type-check:strict": "tsc --noEmit --strict true",

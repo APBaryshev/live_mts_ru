@@ -1,96 +1,158 @@
-name: Deploy Documentation
+name: Tests and Deploy
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
 
 permissions:
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    pages: write
+    id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-          
-      - name: Install dependencies
-        run: |
-          pip install mkdocs-material
-          
-      - name: Build with MkDocs
-        run: |
-          mkdocs build --site-dir public/docs
-          
-      - name: Create landing page
-        run: |
-            cat > public/index.html << 'EOF'
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>MTS Live - Документация и отчеты</title>
-                <style>
-                    body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 40px; 
-                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-                    .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 15px; 
-                                padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
-                    h1 { color: #000; margin-bottom: 30px; font-weight: 700; font-size: 32px; }
-                    .links { display: flex; flex-direction: column; gap: 15px; }
-                    .link { display: flex; align-items: center; padding: 20px; background: #f8f9fa;
-                            border: 2px solid #e9ecef; border-radius: 10px; text-decoration: none;
-                            color: #212529; font-weight: 500; transition: all 0.3s ease; }
-                    .link:hover { background: #007bff; color: white; border-color: #007bff; transform: translateY(-2px); }
-                    .icon { margin-right: 15px; font-size: 24px; }
-                    .badge { margin-left: auto; background: #28a745; color: white; padding: 6px 12px; 
-                            border-radius: 15px; font-size: 12px; font-weight: 600; }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <h1>🎭 MTS Live AQA</h1>
-                    <div class="links">
-                        <a href="./docs/index.html" class="link" target="_blank" rel="noopener noreferrer">
-                            <span class="icon">📚</span>
-                            Документация проекта
-                            <span class="badge">MkDocs</span>
-                        </a>
-                        <a href="./allure/index.html" class="link" target="_blank" rel="noopener noreferrer">
-                            <span class="icon">📊</span>
-                            Allure отчеты тестов
-                            <span class="badge">Coming Soon</span>
-                        </a>
-                    </div>
-                </div>
-            </body>
-            </html>
-            EOF
+    test:
+        runs-on: ubuntu-latest
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-        
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18"
+
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                  java-version: "17"
+                  distribution: "temurin"
+
+            - name: Install Allure
+              run: |
+                  curl -o allure-2.24.0.tgz -Ls https://github.com/allure-framework/allure2/releases/download/2.24.0/allure-2.24.0.tgz
+                  tar -zxvf allure-2.24.0.tgz -C /opt/
+                  ln -sf /opt/allure-2.24.0/bin/allure /usr/bin/allure
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Install Playwright
+              run: npx playwright install
+
+            - name: Run tests
+              run: |
+                  npx playwright test --reporter=line,allure-playwright,html
+              continue-on-error: true
+
+            - name: Generate Allure report
+              run: |
+                  allure generate allure-results -o allure-report --clean
+
+            - name: Upload Allure results
+              uses: actions/upload-artifact@v4
+              with:
+                  name: allure-results
+                  path: allure-results/
+                  retention-days: 30
+
+            - name: Upload Allure report
+              uses: actions/upload-artifact@v4
+              with:
+                  name: allure-report
+                  path: allure-report
+                  retention-days: 30
+
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        runs-on: ubuntu-latest
+        needs: test
+        if: github.ref == 'refs/heads/main'
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Download Allure results
+              uses: actions/download-artifact@v4
+              with:
+                  name: allure-results
+                  path: allure-results
+
+            - name: Download Allure report
+              uses: actions/download-artifact@v4
+              with:
+                  name: allure-report
+                  path: public/allure
+
+            - name: Regenerate Allure report (fresh)
+              run: |
+                  allure generate allure-results -o public/allure --clean
+
+            - name: Setup Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.x"
+
+            - name: Build documentation
+              run: |
+                  pip install mkdocs-material
+                  mkdocs build --site-dir public/docs
+
+            - name: Create landing page
+              run: |
+                  cat > public/index.html << 'EOF'
+                  <!DOCTYPE html>
+                  <html>
+                  <head>
+                      <title>MTS Live - Документация и отчеты</title>
+                      <style>
+                          body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 40px;
+                              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+                          .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 15px;
+                                      padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
+                          h1 { color: #000; margin-bottom: 30px; font-weight: 700; font-size: 32px; }
+                          .links { display: flex; flex-direction: column; gap: 15px; }
+                          .link { display: flex; align-items: center; padding: 20px; background: #f8f9fa;
+                                  border: 2px solid #e9ecef; border-radius: 10px; text-decoration: none;
+                                  color: #212529; font-weight: 500; transition: all 0.3s ease; }
+                          .link:hover { background: #007bff; color: white; border-color: #007bff; transform: translateY(-2px); }
+                          .icon { margin-right: 15px; font-size: 24px; }
+                          .badge { margin-left: auto; background: #28a745; color: white; padding: 6px 12px;
+                                  border-radius: 15px; font-size: 12px; font-weight: 600; }
+                      </style>
+                  </head>
+                  <body>
+                      <div class="container">
+                          <h1>🎭 MTS Live AQA</h1>
+                          <div class="links">
+                              <a href="./docs/index.html" class="link" target="_blank" rel="noopener noreferrer">
+                                  <span class="icon">📚</span>
+                                  Документация проекта
+                                  <span class="badge">MkDocs</span>
+                              </a>
+                              <a href="./allure/index.html" class="link" target="_blank" rel="noopener noreferrer">
+                                  <span class="icon">📊</span>
+                                  Allure отчеты тестов
+                                  <span class="badge">Live</span>
+                              </a>
+                          </div>
+                      </div>
+                  </body>
+                  </html>
+                  EOF
+
+            - name: Setup Pages
+              uses: actions/configure-pages@v3
+
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: ./public
+
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4

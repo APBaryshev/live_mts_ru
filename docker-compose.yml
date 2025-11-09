@@ -1,22 +1,32 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  mts-tests:
-    build: .
-    image: mts-live-tests:latest
-    volumes:
-      - ./allure-results:/app/allure-results
-      - ./playwright-report:/app/playwright-report
-    environment:
-      - CI=true
-    command: npx playwright test --reporter=line,allure-playwright,html
+    mts-tests:
+        build: .
+        image: mts-live-tests:latest
+        volumes:
+            - ./allure-results:/app/allure-results
+            - ./playwright-report:/app/playwright-report
+            - ./test-results:/app/test-results
+        environment:
+            - CI=true
+        command: npx playwright test --reporter=line,allure-playwright,html
 
-  allure-server:
-    image: mts-live-tests:latest
-    ports:
-      - "8050:8050"
-    volumes:
-      - ./allure-results:/app/allure-results
-    command: allure serve allure-results -p 8050
-    depends_on:
-      - mts-tests
+    allure:
+        image: mts-live-tests:latest
+        ports:
+            - "8050:8050"
+        volumes:
+            - ./allure-results:/app/allure-results
+        command: allure serve allure-results -p 8050
+        depends_on:
+            - mts-tests
+
+    docs:
+        image: mts-live-tests:latest
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./:/app
+        working_dir: /app
+        command: mkdocs serve -a 0.0.0.0:8000

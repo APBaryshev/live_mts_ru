@@ -153,3 +153,25 @@ clean:
 # Full cycle: tests -> report -> serve
 full: test allure-report serve
 	@echo "Full test cycle completed!"
+
+# Run tests in Docker
+docker-test:
+	@echo "Running tests in Docker..."
+	docker build -t mts-live-tests:latest .
+	docker run --rm \
+		-v $(PROJECT_DIR)/allure-results:/app/allure-results \
+		-v $(PROJECT_DIR)/playwright-report:/app/playwright-report \
+		mts-live-tests:latest
+
+# Serve Allure report from Docker
+docker-allure-serve:
+	@echo "Serving Allure report on http://localhost:8050"
+	docker run --rm \
+		-p 8050:8050 \
+		-v $(PROJECT_DIR)/allure-results:/app/allure-results \
+		mts-live-tests:latest \
+		allure serve allure-results -p 8050
+
+# Full Docker workflow
+docker-full: docker-test docker-allure-serve
+	@echo "Docker test cycle completed!"
